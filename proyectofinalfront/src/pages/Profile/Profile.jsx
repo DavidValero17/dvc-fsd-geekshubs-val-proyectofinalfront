@@ -13,6 +13,7 @@ export const Profile = () => {
     username: "",
     email: "",
   });
+  const [profileImage, setProfileImage] = useState("");
 
   useEffect(() => {
     if (reduxCredentials?.credentials?.token && !userProfile.username) {
@@ -22,7 +23,7 @@ export const Profile = () => {
             username: respuesta.data.data.username,
             email: respuesta.data.data.email,
           });
-          console.log(respuesta)
+          setProfileImage(respuesta.data.data.profile_image);
         })
         .catch((error) => alert("Se produjo un error al cargar tu perfil"));
     }
@@ -31,6 +32,7 @@ export const Profile = () => {
   return (
     <Container fluid className="CenteredForm">
       <Card style={{ width: "18rem" }}>
+        <Card.Img variant="top" src={profileImage || "https://cdn-icons-png.flaticon.com/512/1077/1077063.png"} />
         <Card.Body>
           <Card.Title>{userProfile.username}</Card.Title>
           <Card.Text>

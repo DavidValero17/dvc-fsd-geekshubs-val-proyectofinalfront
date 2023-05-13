@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { Container, Nav, Navbar } from "react-bootstrap";
 import { userData, userout } from "../../pages/userSlice";
+import "./header.css"
 
 export const Header = () => {
 const dispatch = useDispatch();
@@ -13,13 +14,11 @@ const logout = () => {
 dispatch(userout({ credentials: {}, token: "" }));
 };
 
-console.log(datosCredencialesRedux);
-
 return (
-<Navbar bg="light" expand="lg">
+<Navbar bg="custom" expand="lg" className="navbar-custom">
 <Container>
 <Navbar.Brand as={Link} to="/">
-Mi Sitio Web
+GameFinder
 </Navbar.Brand>
 <Navbar.Toggle aria-controls="basic-navbar-nav" />
 <Navbar.Collapse id="basic-navbar-nav">
@@ -27,7 +26,7 @@ Mi Sitio Web
 {datosCredencialesRedux.credentials?.token &&
 datosCredencialesRedux.credentials.usuario.role_id === 1 ? (
 <>
-<Nav.Link as={Link} to="/perfil">
+<Nav.Link as={Link} to="/profile">
 Perfil
 </Nav.Link>
 <Nav.Link as={Link} to="/addgame">
@@ -36,12 +35,12 @@ Añadir juego
 </>
 ) : datosCredencialesRedux.credentials?.token &&
 datosCredencialesRedux.credentials.usuario.role_id === 2 ? (
-<Nav.Link as={Link} to="/perfil">
+<Nav.Link as={Link} to="/profile">
 Perfil
 </Nav.Link>
 ) : (
 <>
-<Nav.Link as={Link} to="/registro">
+<Nav.Link as={Link} to="/register">
 Registro
 </Nav.Link>
 <Nav.Link as={Link} to="/login">
