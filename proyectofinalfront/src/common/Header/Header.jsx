@@ -14,7 +14,7 @@ export const Header = () => {
               </Nav>
               <Nav>
                 <Nav.Link href="/login">Iniciar sesión</Nav.Link>
-                <Nav.Link href="#">Registrarse</Nav.Link>
+                <Nav.Link href="/register">Registrarse</Nav.Link>
               </Nav>
             </Navbar.Collapse>
           </Container>
