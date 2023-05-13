@@ -46,6 +46,7 @@ export const Login = () => {
       ...prevState,
       [e.target.name]: e.target.value,
     }));
+
   };
 
   const checkError = (e) => {

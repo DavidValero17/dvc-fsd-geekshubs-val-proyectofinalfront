@@ -5,6 +5,7 @@ import { Header } from "./common/Header/Header";
 import { Body } from "./pages/Body/body";
 
 function App() {
+
   return (
     <>
       <Header />
