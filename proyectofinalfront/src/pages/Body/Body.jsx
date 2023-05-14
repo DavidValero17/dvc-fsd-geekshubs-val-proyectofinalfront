@@ -6,7 +6,7 @@ import { Register } from "../Register/Register";
 
 import { Routes, Route, Navigate } from "react-router-dom";
 
-// import { GetAllClients } from "../GetAllClients/GetAllClients";
+import { GetAllUsers } from "../GetAllUsers/GetAllUsers";
 
 export const Body = () => {
   return (
@@ -17,7 +17,7 @@ export const Body = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/register" element={<Register />} />
-        {/* <Route path="/getallclients" element={<GetAllClients />} /> */}
+        <Route path="/getallusers" element={<GetAllUsers />} />
       </Routes>
     </>
   );

@@ -18,3 +18,12 @@ export const getProfile = async (token) => {
     };
     return await axios.get(`${root}/user/getprofile`, config);
   };
+
+export const getAllUsers = async (token) => {
+    let config = {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    };
+    return await axios.get(`${root}/user/profile/getallusers`, config);
+  };

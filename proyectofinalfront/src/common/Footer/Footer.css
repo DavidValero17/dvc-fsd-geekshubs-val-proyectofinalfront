@@ -1,6 +1,5 @@
 .content-wrapper {
   min-height: calc(100vh - 80px);
-  /* La altura total de la pantalla menos la altura del footer (80px en este ejemplo) */
 }
 
 .footer {

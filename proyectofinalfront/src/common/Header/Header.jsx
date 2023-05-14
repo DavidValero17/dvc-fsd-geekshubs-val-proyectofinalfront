@@ -12,6 +12,7 @@ const datosCredencialesRedux = useSelector(userData);
 
 const logout = () => {
 dispatch(userout({ credentials: {}, token: "" }));
+navigate("/");
 };
 
 return (
@@ -28,6 +29,9 @@ datosCredencialesRedux.credentials.usuario.role_id === 1 ? (
 <>
 <Nav.Link as={Link} to="/profile">
 Perfil
+</Nav.Link>
+<Nav.Link as={Link} to="/getallusers">
+Usuarios
 </Nav.Link>
 <Nav.Link as={Link} to="/addgame">
 Añadir juego

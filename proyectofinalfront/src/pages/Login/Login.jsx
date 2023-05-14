@@ -80,70 +80,81 @@ export const Login = () => {
 
         setTimeout(() => {
           navigate("/");
-        }, 3000);
+        }, 1500);
       })
       .catch((error) => alert("Se produjo un error al realizar el login"));
   };
 
   return (
     <div className="loginDesign">
-      {welcome !== "" ? (
-        <div>{welcome}</div>
-      ) : (
-        <Container fluid className="CenteredForm">
-          <Form>
-            <Form.Group
-              as={Row}
-              className="mb-3"
-              controlId="formHorizontalEmail"
-            >
-              <Form.Label column sm={2}>
-                Email
-              </Form.Label>
-              <Col sm={10}>
-                <InputLogin
-                  type="text"
-                  name="email"
-                  placeholder="email@email.com"
-                  changeFunction={(e) => inputHandler(e)}
-                  blurFunction={(e) => checkError(e)}
-                />
-              </Col>
-            </Form.Group>
+  {welcome !== "" ? (
+    <Container
+      fluid
+      className="d-flex align-items-center justify-content-center"
+      style={{ height: "100vh", display: "flex", flexDirection: "column" }}
+    >
+      <div className="d-flex align-items-center justify-content-center">
+        {welcome}
+      </div>
+    </Container>
+  ) : (
+    <Container
+      fluid
+      className="d-flex align-items-center justify-content-center"
+      style={{ height: "100vh", display: "flex", flexDirection: "column" }}
+    >
+      <Form>
+        <Form.Group
+          as={Row}
+          className="mb-3"
+          controlId="formHorizontalEmail"
+        >
+          <Form.Label column sm={2}>
+            Email
+          </Form.Label>
+          <Col sm={10}>
+            <InputLogin
+              type="text"
+              name="email"
+              placeholder="email@email.com"
+              changeFunction={(e) => inputHandler(e)}
+              blurFunction={(e) => checkError(e)}
+            />
+          </Col>
+        </Form.Group>
 
-            <Form.Group
-              as={Row}
-              className="mb-3"
-              controlId="formHorizontalPassword"
-            >
-              <Form.Label column sm={2}>
-                Pass
-              </Form.Label>
-              <Col sm={10}>
-                <InputLogin
-                  type="password"
-                  name="password"
-                  placeholder="password"
-                  changeFunction={(e) => inputHandler(e)}
-                  blurFunction={(e) => checkError(e)}
-                />
-              </Col>
-            </Form.Group>
-            <Form.Group
-              as={Row}
-              className="mb-3"
-              controlId="formHorizontalCheck"
-            >
-            </Form.Group>
+        <Form.Group
+          as={Row}
+          className="mb-3"
+          controlId="formHorizontalPassword"
+        >
+          <Form.Label column sm={2}>
+            Pass
+          </Form.Label>
+          <Col sm={10}>
+            <InputLogin
+              type="password"
+              name="password"
+              placeholder="password"
+              changeFunction={(e) => inputHandler(e)}
+              blurFunction={(e) => checkError(e)}
+            />
+          </Col>
+        </Form.Group>
+        <Form.Group
+          as={Row}
+          className="mb-3"
+          controlId="formHorizontalCheck"
+        ></Form.Group>
 
-            <Form.Group as={Row} className="mb-3">
-              <Col sm={{ span: 10, offset: 2 }}>
-                <Button onClick={() => logeame()}>Log Me</Button>
-              </Col>
-            </Form.Group>
-          </Form>
-        </Container>
-      )}
-    </div>
+        <Form.Group as={Row} className="mb-3">
+          <Col sm={{ span: 10, offset: 2 }}>
+            <Button onClick={() => logeame()}>Log Me</Button>
+          </Col>
+        </Form.Group>
+      </Form>
+    </Container>
+  )}
+</div>
   );
 };
