@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
+import Card from "react-bootstrap/Card";
+import Container from "react-bootstrap/Container";
+import { Row, Col } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import { Table } from "react-bootstrap";
 import { getAllUsers } from "../../services/apiCalls";
 import { userData } from "../userSlice";
+import "./GetAllUsers.css";
 
 export const GetAllUsers = () => {
   const reduxCredentials = useSelector(userData);
@@ -14,30 +17,28 @@ export const GetAllUsers = () => {
         .then((respuesta) => {
           setUserInfo(respuesta.data.data);
         })
-        .catch((error) => alert("Se produjo un error al cargar los clientes"));
+        .catch((error) =>
+          alert("Se produjo un error al cargar los clientes")
+        );
     }
   }, [userInfo]);
 
   return (
-    <div className="AppointmentsCards vh-100">
-      <Table striped bordered hover responsive>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Nombre de Usuario</th>
-            <th>Email</th>
-          </tr>
-        </thead>
-        <tbody>
+    <div className="AppointmentsCards vh-100 table-container">
+      <Container fluid>
+        <Row className="justify-content-center">
           {userInfo.map((user) => (
-            <tr key={user.id}>
-              <td>{user.id}</td>
-              <td>{user.username}</td>
-              <td>{user.email}</td>
-            </tr>
+            <Col key={user.id} xs={12} sm={6} md={4} lg={3} className="my-3">
+              <Card>
+                <Card.Body>
+                  <Card.Title>{user.username}</Card.Title>
+                  <Card.Text>{user.email}</Card.Text>
+                </Card.Body>
+              </Card>
+            </Col>
           ))}
-        </tbody>
-      </Table>
+        </Row>
+      </Container>
     </div>
   );
 };
