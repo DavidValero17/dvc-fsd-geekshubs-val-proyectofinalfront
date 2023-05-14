@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
-
 import Card from "react-bootstrap/Card";
 import Container from "react-bootstrap/Container";
-
+import Image from "react-bootstrap/Image";
 import { useSelector } from "react-redux";
 import { getProfile } from "../../services/apiCalls";
 import { userData } from "../userSlice";
@@ -30,13 +29,22 @@ export const Profile = () => {
   }, [reduxCredentials, userProfile]);
 
   return (
-    <Container fluid className="CenteredForm">
-      <Card style={{ width: "18rem" }}>
-        <Card.Img variant="top" src={profileImage || "https://cdn-icons-png.flaticon.com/512/1077/1077063.png"} />
-        <Card.Body>
-          <Card.Title>{userProfile.username}</Card.Title>
+    <Container className="d-flex align-items-center justify-content-center" style={{ height: "80vh", width: "80vw" }}>
+      <Card className="ProfileCard shadow-lg w-75">
+        <div className="d-flex justify-content-center">
+          <Image
+            src={profileImage || "https://cdn-icons-png.flaticon.com/512/1077/1077063.png"}
+            alt="profile image"
+            className="ProfileImage mx-auto mt-4"
+            roundedCircle
+            width={150}
+            height={150}
+          />
+        </div>
+        <Card.Body className="text-center">
+          <Card.Title className="ProfileTitle mt-3">{userProfile.username}</Card.Title>
           <Card.Text>
-            <li>{userProfile.email}</li>
+            <p className="ProfileEmail mb-4">{userProfile.email}</p>
           </Card.Text>
         </Card.Body>
       </Card>

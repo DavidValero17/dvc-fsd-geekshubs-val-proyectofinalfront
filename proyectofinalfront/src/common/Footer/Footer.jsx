@@ -2,7 +2,6 @@ import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import "./Footer.css"
 
-
 export const Footer = () => {
   return (
     <footer className="footer">
