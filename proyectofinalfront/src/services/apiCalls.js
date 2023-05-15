@@ -27,3 +27,21 @@ export const getAllUsers = async (token) => {
     };
     return await axios.get(`${root}/user/profile/getallusers`, config);
   };
+
+  export const getAllVideogames = async (token) => {
+    let config = {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    };
+    return await axios.get(`${root}/user/getallvideogames`, config);
+  };
+
+  export const addVideogame = async (body, token) => {
+    let config = {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    };
+    return await axios.post(`${root}/user/addvideogame`, body, config);
+};

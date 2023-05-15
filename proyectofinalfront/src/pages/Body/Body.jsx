@@ -7,6 +7,9 @@ import { Register } from "../Register/Register";
 import { Routes, Route, Navigate } from "react-router-dom";
 
 import { GetAllUsers } from "../GetAllUsers/GetAllUsers";
+import { GetAllVideogames } from "../GetAllVideogames/GetAllVideogames";
+import { AddVideogame } from "../AddVideogame/AddVideogame";
+
 
 export const Body = () => {
   return (
@@ -18,6 +21,8 @@ export const Body = () => {
         <Route path="/profile" element={<Profile />} />
         <Route path="/register" element={<Register />} />
         <Route path="/getallusers" element={<GetAllUsers />} />
+        <Route path="/getallvideogames" element={<GetAllVideogames />} />
+        <Route path="/addvideogame" element={<AddVideogame />} />
       </Routes>
     </>
   );
