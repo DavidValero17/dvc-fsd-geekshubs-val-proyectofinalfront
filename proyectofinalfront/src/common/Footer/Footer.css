@@ -1,13 +1,20 @@
 .footer {
-  background-color: #1E1E1E4A;
+  background-color: #1e1e1e4a;
   color: white;
   height: 60px;
   display: flex;
   justify-content: center;
   align-items: center;
-  position: fixed;
+  position: sticky;
   bottom: 0;
   left: 0;
   right: 0;
+  width: 100%;
 }
 
+@media (max-width: 576px) {
+  .footer {
+    position: static;
+    margin-top: 20px;
+  }
+}
