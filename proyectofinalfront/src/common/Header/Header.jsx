@@ -60,10 +60,12 @@ export const Header = () => {
                 </Nav.Link>
               </>
             )}
-            {datosCredencialesRedux.credentials?.token && (
-              <Nav.Link onClick={logout}>Cerrar sesión</Nav.Link>
-            )}
           </Nav>
+          {datosCredencialesRedux.credentials?.token && (
+            <Nav className="ml-auto">
+              <Nav.Link onClick={logout}>Cerrar sesión</Nav.Link>
+            </Nav>
+          )}
         </Navbar.Collapse>
       </Container>
     </Navbar>
