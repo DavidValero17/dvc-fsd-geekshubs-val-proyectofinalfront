@@ -39,6 +39,9 @@ export const Header = () => {
                 <Nav.Link as={Link} to="/addvideogame">
                   Añadir juego
                 </Nav.Link>
+                <Nav.Link as={Link} to="/updatevideogame">
+                  Actualizar juego
+                </Nav.Link>
               </>
             ) : datosCredencialesRedux.credentials?.token &&
               datosCredencialesRedux.credentials.usuario.role_id === 2 ? (

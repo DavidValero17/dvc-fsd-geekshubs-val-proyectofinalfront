@@ -45,3 +45,12 @@ export const getAllUsers = async (token) => {
     };
     return await axios.post(`${root}/user/addvideogame`, body, config);
 };
+
+export const updateVideogame = async (body, token) => {
+  let config = {
+    headers: {
+      Authorization: "Bearer " + token,
+    },
+  };
+  return await axios.put(`${root}/user/updatevideogame/`, body, config);
+};

@@ -9,6 +9,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import { GetAllUsers } from "../GetAllUsers/GetAllUsers";
 import { GetAllVideogames } from "../GetAllVideogames/GetAllVideogames";
 import { AddVideogame } from "../AddVideogame/AddVideogame";
+import { UpdateVideogame } from "../UpdateVideogame/UpdateVideogame";
 
 
 export const Body = () => {
@@ -23,6 +24,8 @@ export const Body = () => {
         <Route path="/getallusers" element={<GetAllUsers />} />
         <Route path="/getallvideogames" element={<GetAllVideogames />} />
         <Route path="/addvideogame" element={<AddVideogame />} />
+        <Route path="/updatevideogame" element={<UpdateVideogame />} />
+
       </Routes>
     </>
   );
