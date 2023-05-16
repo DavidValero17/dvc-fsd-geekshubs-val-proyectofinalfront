@@ -28,13 +28,41 @@ export const getAllUsers = async (token) => {
     return await axios.get(`${root}/user/profile/getallusers`, config);
   };
 
-  export const getAllVideogames = async (token) => {
+  export const getAllVideogames = async (token, filters={}) => {
     let config = {
       headers: {
         Authorization: "Bearer " + token,
       },
     };
-    return await axios.get(`${root}/user/getallvideogames`, config);
+
+    const { genre, title, year, multiplayer, online, developer } = filters
+    let url = `${root}/user/getallvideogames?`
+
+    if(genre){
+      url += `&genre=${genre}`
+    }
+
+    if(title){
+      url += `&title=${title}`
+    }
+
+    if(year){
+      url += `&year=${year}`
+    }
+
+    if(multiplayer){
+      url += `&multiplayer=${multiplayer}`
+    }
+
+    if(online){
+      url += `&online=${online}`
+    }
+
+    if(developer){  
+      url += `&developer=${developer}`
+    }
+
+    return await axios.get(url, config);
   };
 
   export const addVideogame = async (body, token) => {
