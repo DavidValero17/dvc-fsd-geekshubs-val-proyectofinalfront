@@ -5,6 +5,7 @@ import Image from "react-bootstrap/Image";
 import { useSelector } from "react-redux";
 import { getProfile, updateProfile } from "../../services/apiCalls";
 import { userData } from "../userSlice";
+import Alert from "react-bootstrap/Alert";
 
 export const Profile = () => {
   const reduxCredentials = useSelector(userData);
@@ -14,6 +15,8 @@ export const Profile = () => {
   });
   const [profileImage, setProfileImage] = useState("");
   const [newUsername, setNewUsername] = useState("");
+  const [updateSuccess, setUpdateSuccess] = useState(false);
+  const [showUpdateForm, setShowUpdateForm] = useState(false);
 
   useEffect(() => {
     if (reduxCredentials?.credentials?.token && !userProfile.username) {
@@ -39,13 +42,23 @@ export const Profile = () => {
           ...prevProfile,
           username: newUsername,
         }));
-        alert("¡Perfil actualizado exitosamente!");
+        setUpdateSuccess(true);
       })
       .catch((error) => {
         console.error("Error al actualizar el perfil:", error);
         alert("Se produjo un error al actualizar tu perfil");
       });
   };
+
+  useEffect(() => {
+    if (updateSuccess) {
+      const timeout = setTimeout(() => {
+        window.location.reload();
+      }, 1000);
+  
+      return () => clearTimeout(timeout);
+    }
+  }, [updateSuccess]);
 
   return (
     <Container
@@ -68,16 +81,29 @@ export const Profile = () => {
           <Card.Text>
             <p className="ProfileEmail mb-4">{userProfile.email}</p>
           </Card.Text>
-          <input
-            type="text"
-            placeholder="Nuevo nombre de usuario"
-            value={newUsername}
-            onChange={(e) => setNewUsername(e.target.value)}
-            className="form-control mb-3"
-          />
-          <button onClick={handleUpdateProfile} className="btn btn-primary">
-            Actualizar perfil
-          </button>
+          {showUpdateForm ? (
+            <>
+              <input
+                type="text"
+                placeholder="Nuevo nombre de usuario"
+                value={newUsername}
+                onChange={(e) => setNewUsername(e.target.value)}
+                className="form-control mb-3"
+              />
+              <button onClick={handleUpdateProfile} className="btn btn-primary">
+                Actualizar perfil
+              </button>
+            </>
+          ) : (
+            <button onClick={() => setShowUpdateForm(true)} className="btn btn-primary">
+              Actualizar tu Nombre de usuario
+            </button>
+          )}
+          {updateSuccess && (
+            <Alert variant="success" onClose={() => setUpdateSuccess(false)} dismissible>
+              ¡Perfil actualizado exitosamente!
+            </Alert>
+          )}
         </Card.Body>
       </Card>
     </Container>
