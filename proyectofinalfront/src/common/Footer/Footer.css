@@ -10,7 +10,7 @@
   left: 0;
   right: 0;
   width: 100%;
-  z-index: 9999; /* Asegura que el footer esté por encima de otros elementos */
+  z-index: 9999; 
 }
 
 @media (max-width: 576px) {
