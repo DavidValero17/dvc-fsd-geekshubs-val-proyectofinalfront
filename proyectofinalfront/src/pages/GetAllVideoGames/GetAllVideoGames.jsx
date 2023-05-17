@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { Form } from "react-bootstrap";
 import { getAllVideogames } from "../../services/apiCalls";
 import { userData } from "../userSlice";
+import { debounce } from "lodash";
 
 export const GetAllVideogames = () => {
   const userState = useSelector(userData);
@@ -12,23 +13,27 @@ export const GetAllVideogames = () => {
   const [showFilters, setShowFilters] = useState(false);
 
   useEffect(() => {
-    getAllVideogames(userState.credentials.token, filters)
-      .then((respuesta) => {
-        setVideogameInfo(respuesta.data.data);
-      })
-      .catch((error) => {
-        alert("Se produjo un error al cargar los videojuegos");
-      });
+    const debounceVideogames = debounce((token, filters) => {
+      getAllVideogames(token, filters)
+        .then((respuesta) => {
+          setVideogameInfo(respuesta.data.data);
+        })
+        .catch((error) => {
+          alert("Se produjo un error al cargar los videojuegos");
+        });
+    }, 1000); 
+
+    debounceVideogames(userState.credentials.token, filters);
   }, [userState.credentials.token, filters]);
 
   const handleFilterChange = (e) => {
     const { name, value } = e.target;
-    setFilters({ ...filters, [name]: value });
+    setFilters((prevFilters) => ({ ...prevFilters, [name]: value }));
   };
 
   const handleCheckboxChange = (e) => {
     const { name, checked } = e.target;
-    setFilters({ ...filters, [name]: checked });
+    setFilters((prevFilters) => ({ ...prevFilters, [name]: checked }));
   };
 
   const toggleFilters = () => {
