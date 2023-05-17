@@ -28,35 +28,35 @@ export const Header = () => {
             datosCredencialesRedux.credentials.usuario.role_id === 1 ? (
               <>
                 <Nav.Link as={Link} to="/profile">
-                  Perfil
+                  Profile
                 </Nav.Link>
                 <Nav.Link as={Link} to="/getallusers">
-                  Usuarios
+                  Users
                 </Nav.Link>
                 <Nav.Link as={Link} to="/getallvideogames">
-                  Videojuegos
+                  Videogames
                 </Nav.Link>
                 <Nav.Link as={Link} to="/addvideogame">
-                  Añadir juego
+                  Add game
                 </Nav.Link>
                 <Nav.Link as={Link} to="/updatevideogame">
-                  Actualizar juego
+                  Update game
                 </Nav.Link>
               </>
             ) : datosCredencialesRedux.credentials?.token &&
               datosCredencialesRedux.credentials.usuario.role_id === 2 ? (
               <>
                 <Nav.Link as={Link} to="/profile">
-                  Perfil
+                  Profile
                 </Nav.Link>
                 <Nav.Link as={Link} to="/getallvideogames">
-                  Videojuegos
+                  Videogames
                 </Nav.Link>
               </>
             ) : (
               <>
                 <Nav.Link as={Link} to="/register">
-                  Registro
+                  Register
                 </Nav.Link>
                 <Nav.Link as={Link} to="/login">
                   Login
@@ -66,7 +66,7 @@ export const Header = () => {
           </Nav>
           {datosCredencialesRedux.credentials?.token && (
             <Nav className="ml-auto">
-              <Nav.Link onClick={logout}>Cerrar sesión</Nav.Link>
+              <Nav.Link onClick={logout}>Log Out</Nav.Link>
             </Nav>
           )}
         </Navbar.Collapse>
