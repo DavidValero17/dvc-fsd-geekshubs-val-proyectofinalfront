@@ -19,16 +19,52 @@ export const GetAllVideogames = () => {
       });
   }, [userState.credentials.token,filters]);
 
+  const handleFilterChange = (e) => {
+    const { name, value } = e.target;
+    setFilters({ ...filters, [name]: value });
+  };
+
+  const handleCheckboxChange = (e) => {
+    const { name, checked } = e.target;
+    setFilters({ ...filters, [name]: checked });
+  };
+
   return (
     <div className="table-container">
       <input
         placeholder="Título..."
         name="title"
         value={filters?.title ?? ""}
-        onChange={(e) => {
-          setFilters({ ...filters, title: e.target.value });
-        }}
+        onChange={handleFilterChange}
       />
+      <input
+        placeholder="Género..."
+        name="genre"
+        value={filters?.genre ?? ""}
+        onChange={handleFilterChange}
+      />
+      <input
+        placeholder="Año..."
+        name="year"
+        value={filters?.year ?? ""}
+        onChange={handleFilterChange}
+      />
+      <input
+        type="checkbox"
+        name="multiplayer"
+        checked={filters.multiplayer ?? false}
+        onChange={handleCheckboxChange}
+      />
+      <label htmlFor="multiplayer">Multiplayer</label>
+      <br />
+      <input
+        type="checkbox"
+        name="online"
+        checked={filters.online ?? false}
+        onChange={handleCheckboxChange}
+      />
+      <label htmlFor="online">Online</label>
+      <br />
       <Table responsive bordered hover>
         <thead>
           <tr>
