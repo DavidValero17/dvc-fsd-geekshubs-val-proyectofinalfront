@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Table from "react-bootstrap/Table";
 import { useSelector } from "react-redux";
+import { Form } from "react-bootstrap";
 import { getAllVideogames } from "../../services/apiCalls";
 import { userData } from "../userSlice";
 
@@ -8,6 +9,7 @@ export const GetAllVideogames = () => {
   const userState = useSelector(userData);
   const [videogameInfo, setVideogameInfo] = useState([]);
   const [filters, setFilters] = useState({});
+  const [showFilters, setShowFilters] = useState(false);
 
   useEffect(() => {
     getAllVideogames(userState.credentials.token, filters)
@@ -17,7 +19,7 @@ export const GetAllVideogames = () => {
       .catch((error) => {
         alert("Se produjo un error al cargar los videojuegos");
       });
-  }, [userState.credentials.token,filters]);
+  }, [userState.credentials.token, filters]);
 
   const handleFilterChange = (e) => {
     const { name, value } = e.target;
@@ -29,48 +31,90 @@ export const GetAllVideogames = () => {
     setFilters({ ...filters, [name]: checked });
   };
 
+  const toggleFilters = () => {
+    setShowFilters(!showFilters);
+  };
+
   return (
     <div className="table-container">
-      <input
-        placeholder="Título..."
-        name="title"
-        value={filters?.title ?? ""}
-        onChange={handleFilterChange}
-      />
-      <input
-        placeholder="Género..."
-        name="genre"
-        value={filters?.genre ?? ""}
-        onChange={handleFilterChange}
-      />
-      <input
-        placeholder="Año..."
-        name="year"
-        value={filters?.year ?? ""}
-        onChange={handleFilterChange}
-      />
-      <input
-        type="checkbox"
-        name="multiplayer"
-        checked={filters.multiplayer ?? false}
-        onChange={handleCheckboxChange}
-      />
-      <label htmlFor="multiplayer">Multiplayer</label>
-      <br />
-      <input
-        type="checkbox"
-        name="online"
-        checked={filters.online ?? false}
-        onChange={handleCheckboxChange}
-      />
-      <label htmlFor="online">Online</label>
-      <br />
+      <button
+        onClick={toggleFilters}
+        style={{
+          border: "none",
+          padding: "10px 20px",
+          borderRadius: "4px",
+          fontSize: "16px",
+          fontWeight: "bold",
+          cursor: "pointer",
+          boxShadow: "0 2px 4px rgba(0, 0, 0, 0.2)",
+          transition: "background-color 0.3s ease",
+          marginBottom: "10px",
+        }}
+      >
+        Filtros
+      </button>
+      {showFilters && (
+        <Form>
+          <Form.Group controlId="formTitle">
+            <Form.Label>Título:</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Título..."
+              name="title"
+              value={filters?.title ?? ""}
+              onChange={handleFilterChange}
+            />
+          </Form.Group>
+
+          <Form.Group controlId="formGenre">
+            <Form.Label>Género:</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Género..."
+              name="genre"
+              value={filters?.genre ?? ""}
+              onChange={handleFilterChange}
+            />
+          </Form.Group>
+
+          <Form.Group controlId="formYear">
+            <Form.Label>Año:</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Año..."
+              name="year"
+              value={filters?.year ?? ""}
+              onChange={handleFilterChange}
+            />
+          </Form.Group>
+
+          <Form.Group controlId="formMultiplayer">
+            <Form.Check
+              type="checkbox"
+              name="multiplayer"
+              label="Multiplayer"
+              checked={filters.multiplayer ?? false}
+              onChange={handleCheckboxChange}
+            />
+          </Form.Group>
+
+          <Form.Group controlId="formOnline">
+            <Form.Check
+              type="checkbox"
+              name="online"
+              label="Online"
+              checked={filters.online ?? false}
+              onChange={handleCheckboxChange}
+            />
+          </Form.Group>
+        </Form>
+      )}
       <Table responsive bordered hover>
         <thead>
           <tr>
             <th>Image</th>
             <th>Title</th>
-            <th>Description</th>
+            {/* <th>Description</th> */}
             <th>Genre</th>
             <th>Year</th>
           </tr>
@@ -86,7 +130,7 @@ export const GetAllVideogames = () => {
                 />
               </td>
               <td>{videogame.title}</td>
-              <td>{videogame.description}</td>
+              {/* <td>{videogame.description}</td> */}
               <td>{videogame.genre}</td>
               <td>{videogame.year}</td>
             </tr>
