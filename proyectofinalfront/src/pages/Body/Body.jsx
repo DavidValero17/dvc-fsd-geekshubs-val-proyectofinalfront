@@ -10,6 +10,7 @@ import { GetAllUsers } from "../GetAllUsers/GetAllUsers";
 import { GetAllVideogames } from "../GetAllVideogames/GetAllVideogames";
 import { AddVideogame } from "../AddVideogame/AddVideogame";
 import { UpdateVideogame } from "../UpdateVideogame/UpdateVideogame";
+import { VideogameDetail } from "../VideogameDetail/VideogameDetail";
 
 
 export const Body = () => {
@@ -25,7 +26,7 @@ export const Body = () => {
         <Route path="/getallvideogames" element={<GetAllVideogames />} />
         <Route path="/addvideogame" element={<AddVideogame />} />
         <Route path="/updatevideogame" element={<UpdateVideogame />} />
-
+        <Route path="/videogamedetail/:id" element={<VideogameDetail />} />
       </Routes>
     </>
   );

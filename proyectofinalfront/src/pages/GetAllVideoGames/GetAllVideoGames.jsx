@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Table from "react-bootstrap/Table";
+import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Form } from "react-bootstrap";
 import { getAllVideogames } from "../../services/apiCalls";
@@ -11,9 +12,8 @@ export const GetAllVideogames = () => {
   const [videogameInfo, setVideogameInfo] = useState([]);
   const [filters, setFilters] = useState({});
   const [showFilters, setShowFilters] = useState(false);
-
   useEffect(() => {
-    const debounceVideogames = debounce((token, filters) => {
+    const debouncedVideogames = debounce((token, filters) => {
       getAllVideogames(token, filters)
         .then((respuesta) => {
           setVideogameInfo(respuesta.data.data);
@@ -21,9 +21,9 @@ export const GetAllVideogames = () => {
         .catch((error) => {
           alert("Se produjo un error al cargar los videojuegos");
         });
-    }, 1000); 
+    }, 750);
 
-    debounceVideogames(userState.credentials.token, filters);
+    debouncedVideogames(userState.credentials.token, filters);
   }, [userState.credentials.token, filters]);
 
   const handleFilterChange = (e) => {
@@ -119,7 +119,6 @@ export const GetAllVideogames = () => {
           <tr>
             <th>Image</th>
             <th>Title</th>
-            {/* <th>Description</th> */}
             <th>Genre</th>
             <th>Year</th>
           </tr>
@@ -134,8 +133,11 @@ export const GetAllVideogames = () => {
                   alt={videogame.description}
                 />
               </td>
-              <td>{videogame.title}</td>
-              {/* <td>{videogame.description}</td> */}
+              <td>
+                <Link to={`/videogamedetail/${videogame.id}`}>
+                  {videogame.title}
+                </Link>
+              </td>
               <td>{videogame.genre}</td>
               <td>{videogame.year}</td>
             </tr>

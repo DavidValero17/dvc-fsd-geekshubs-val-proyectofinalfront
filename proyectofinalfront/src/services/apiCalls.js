@@ -74,6 +74,15 @@ export const getAllUsers = async (token) => {
     return await axios.get(url, config);
   };
 
+  export const getVideogameById = async (token, id) => {
+    let config = {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    };
+    return await axios.get(`${root}/user/getvideogamebyid/${id}`, config);
+  };
+
   export const addVideogame = async (body, token) => {
     let config = {
       headers: {
