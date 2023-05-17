@@ -34,10 +34,14 @@ export const VideogameDetail = () => {
     <div className="videogame-detail">
     <Card>
       <Card.Img variant="top" src={videogameInfo.image} alt={videogameInfo.description} />
+      <hr />
       <Card.Body>
         <Card.Title>{videogameInfo.title}</Card.Title>
+        <hr />
         <Card.Text>{videogameInfo.description}</Card.Text>
+        <hr />
         <Card.Text>Genre: {videogameInfo.genre}</Card.Text>
+        <hr />
         <Card.Text>Year: {videogameInfo.year}</Card.Text>
       </Card.Body>
     </Card>

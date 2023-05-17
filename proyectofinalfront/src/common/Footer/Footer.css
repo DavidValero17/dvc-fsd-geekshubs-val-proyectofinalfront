@@ -5,11 +5,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  position: sticky;
+  position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
   width: 100%;
+  z-index: 9999; /* Asegura que el footer esté por encima de otros elementos */
 }
 
 @media (max-width: 576px) {
@@ -18,3 +19,4 @@
     margin-top: 20px;
   }
 }
+
