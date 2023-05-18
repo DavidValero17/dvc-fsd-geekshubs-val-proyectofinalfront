@@ -17,6 +17,7 @@ export const UpdateVideogame = () => {
     online: false,
     developer_id: '',
   });
+  const [successMessage, setSuccessMessage] = useState('');
 
   const handleChange = (e) => {
     setFormData({
@@ -48,6 +49,7 @@ export const UpdateVideogame = () => {
         developer_id
       };
       const response = await updateVideogame(data, userState.credentials.token);
+      setSuccessMessage('El videojuego ha sido actualizado exitosamente.');
       setFormData({
         videogame_id: '',
         title: '',
@@ -59,6 +61,9 @@ export const UpdateVideogame = () => {
         online: false,
         developer_id: '',
       });
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
     } catch (error) {
       console.error('Error al actualizar el videojuego:', error);
     }
@@ -67,6 +72,7 @@ export const UpdateVideogame = () => {
   return (
     <Container>
       <h1>Actualizar Videojuego</h1>
+      {successMessage && <p>{successMessage}</p>}
       <Form onSubmit={handleSubmit}>
         <Form.Group>
           <Form.Label>ID del juego:</Form.Label>
