@@ -5,7 +5,7 @@
   <ol>
     <li><a href="#sobre-el-proyecto">Sobre el proyecto</a></li>
     <li><a href="#stack">Stack</a></li>
-    <li><a href="#capturas">Capturas</a></li>
+    <li><a href="#capturas-del-proyecto">Capturas</a></li>
     <li><a href="#agradecimientos">Agradecimientos</a></li>
   </ol>
 </details>
