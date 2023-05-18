@@ -3,7 +3,7 @@ import Card from "react-bootstrap/Card";
 import Container from "react-bootstrap/Container";
 import Image from "react-bootstrap/Image";
 import { useSelector } from "react-redux";
-import { getProfile, updateProfile } from "../../services/apiCalls";
+import { getProfile, updateProfile, deleteFavorite } from "../../services/apiCalls";
 import { userData } from "../userSlice";
 import Alert from "react-bootstrap/Alert";
 import Table from "react-bootstrap/Table";
@@ -24,7 +24,8 @@ export const Profile = () => {
     if (reduxCredentials?.credentials?.token && !userProfile.username) {
       getProfile(reduxCredentials.credentials.token)
         .then((response) => {
-          const { username, email, profile_image, favorites } = response.data.data;
+          const { username, email, profile_image, favorites } =
+            response.data.data;
           setUserProfile({ username, email, favorites });
           setProfileImage(profile_image);
         })
@@ -62,12 +63,38 @@ export const Profile = () => {
     }
   }, [updateSuccess]);
 
+  const handleDeleteFavorite = (videogame_id) => {
+    const body = {
+      videogame_id: videogame_id,
+    };
+
+    deleteFavorite(body, reduxCredentials.credentials.token)
+      .then((response) => {
+        setUserProfile((prevProfile) => ({
+          ...prevProfile,
+          favorites: prevProfile.favorites.filter(
+            (favorite) => favorite.videogame_id !== videogame_id
+          ),
+        }));
+      })
+      .catch((error) => {
+        console.error("Error al eliminar el videojuego de favoritos:", error);
+        alert("Se produjo un error al eliminar el videojuego de favoritos");
+      });
+  };
+
   return (
-    <Container className="d-flex align-items-center justify-content-center" style={{ minHeight: "100vh" }}>
+    <Container
+      className="d-flex align-items-center justify-content-center"
+      style={{ minHeight: "100vh" }}
+    >
       <Card className="ProfileCard shadow-lg w-75">
         <div className="d-flex justify-content-center mt-4">
           <Image
-            src={profileImage || "https://cdn-icons-png.flaticon.com/512/1077/1077063.png"}
+            src={
+              profileImage ||
+              "https://cdn-icons-png.flaticon.com/512/1077/1077063.png"
+            }
             alt="profile image"
             className="ProfileImage"
             roundedCircle
@@ -76,33 +103,12 @@ export const Profile = () => {
           />
         </div>
         <Card.Body className="text-center">
-          <Card.Title className="ProfileTitle mt-3">{userProfile.username}</Card.Title>
-          <Card.Text className="ProfileEmail mb-4">{userProfile.email}</Card.Text>
-          {userProfile.favorites.length > 0 && (
-            <>
-              <h3 className="mb-3">Favoritos:</h3>
-              <Table striped bordered responsive>
-                <thead>
-                  <tr>
-                    <th>Title</th>
-                    <th>Description</th>
-                    <th>Genre</th>
-                    <th>Year</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {userProfile.favorites.map((favorite) => (
-                    <tr key={favorite.id}>
-                      <td>{favorite.Videogame.title}</td>
-                      <td>{favorite.Videogame.description}</td>
-                      <td>{favorite.Videogame.genre}</td>
-                      <td>{favorite.Videogame.year}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </Table>
-            </>
-          )}
+          <Card.Title className="ProfileTitle mt-3">
+            {userProfile.username}
+          </Card.Title>
+          <Card.Text className="ProfileEmail mb-4">
+            {userProfile.email}
+          </Card.Text>
           {showUpdateForm ? (
             <>
               <input
@@ -117,12 +123,58 @@ export const Profile = () => {
               </button>
             </>
           ) : (
-            <button onClick={() => setShowUpdateForm(true)} className="btn btn-primary">
-              Actualizar tu Nombre de usuario
-            </button>
+            <>
+              <button
+                onClick={() => setShowUpdateForm(true)}
+                className="btn btn-primary mb-3"
+              >
+                Actualizar tu Nombre de usuario
+              </button>
+              <Table responsive>
+                <thead>
+                  <tr>
+                    <th>Image</th>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Genre</th>
+                    <th>Year</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {userProfile.favorites.map((favorite) => (
+                    <tr key={favorite.id}>
+                      <td>
+                        <img
+                          style={{ height: "50px" }}
+                          src={favorite.Videogame.image}
+                          alt={favorite.Videogame.description}
+                        />
+                      </td>
+                      <td>{favorite.Videogame.title}</td>
+                      <td>{favorite.Videogame.description}</td>
+                      <td>{favorite.Videogame.genre}</td>
+                      <td>{favorite.Videogame.year}</td>
+                      <td>
+                        <button
+                          onClick={() => handleDeleteFavorite(favorite.videogame_id)}
+                          className="btn btn-danger"
+                        >
+                          Eliminar
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </Table>
+            </>
           )}
           {updateSuccess && (
-            <Alert variant="success" onClose={() => setUpdateSuccess(false)} dismissible>
+            <Alert
+              variant="success"
+              onClose={() => setUpdateSuccess(false)}
+              dismissible
+            >
               ¡Perfil actualizado exitosamente!
             </Alert>
           )}

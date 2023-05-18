@@ -109,3 +109,13 @@ export const addToFavorite = async (body, token) => {
   };
   return await axios.post(`${root}/user/addtofavorite`, body, config);
 };
+
+export const deleteFavorite = async (body, token) => {
+  let config = {
+    headers: {
+      Authorization: "Bearer " + token,
+    },
+    data: body, // Pasar los parámetros en la propiedad 'data'
+  };
+  return await axios.delete(`${root}/user/deletefavorite`, config);
+};
