@@ -119,7 +119,7 @@ export const Profile = () => {
                 className="form-control mb-3"
               />
               <button onClick={handleUpdateProfile} className="btn btn-primary">
-                Actualizar perfil
+                Update profile
               </button>
             </>
           ) : (
@@ -128,7 +128,7 @@ export const Profile = () => {
                 onClick={() => setShowUpdateForm(true)}
                 className="btn btn-primary mb-3"
               >
-                Actualizar tu Nombre de usuario
+                Update your username
               </button>
               <Table responsive>
                 <thead>
@@ -160,7 +160,7 @@ export const Profile = () => {
                           onClick={() => handleDeleteFavorite(favorite.videogame_id)}
                           className="btn btn-danger"
                         >
-                          Eliminar
+                          Delete
                         </button>
                       </td>
                     </tr>
@@ -175,7 +175,7 @@ export const Profile = () => {
               onClose={() => setUpdateSuccess(false)}
               dismissible
             >
-              ¡Perfil actualizado exitosamente!
+              ¡Profile updated succesfully!
             </Alert>
           )}
         </Card.Body>
