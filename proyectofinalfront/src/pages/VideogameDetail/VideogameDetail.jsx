@@ -18,14 +18,14 @@ export const VideogameDetail = () => {
     getVideogameById(userState.credentials.token, id)
       .then((respuesta) => {
         setVideogameInfo(respuesta.data.data);
-        setIsFavorite(respuesta.data.data.isFavorite); // Agregamos esta línea para verificar si el videojuego ya está en favoritos
+        setIsFavorite(respuesta.data.data.isFavorite); 
       })
       .catch((error) => {
         setShowToast(false);
       });
   };
 
-  const handleAddToFavorites = () => {
+  const AddToFavorites = () => {
     addToFavorite({ videogame_id: id }, userState.credentials.token)
       .then((response) => {
         setIsFavorite(true);
@@ -57,7 +57,7 @@ export const VideogameDetail = () => {
           <Card.Text>Genre: {videogameInfo.genre}</Card.Text>
           <Card.Text>Year: {videogameInfo.year}</Card.Text>
           {!isFavorite && (
-            <Button variant="primary" onClick={handleAddToFavorites}>
+            <Button variant="primary" onClick={AddToFavorites}>
               Add to Favorites
             </Button>
           )}

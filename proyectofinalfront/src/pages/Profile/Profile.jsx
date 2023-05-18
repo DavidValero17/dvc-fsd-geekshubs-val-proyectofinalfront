@@ -6,12 +6,14 @@ import { useSelector } from "react-redux";
 import { getProfile, updateProfile } from "../../services/apiCalls";
 import { userData } from "../userSlice";
 import Alert from "react-bootstrap/Alert";
+import Table from "react-bootstrap/Table";
 
 export const Profile = () => {
   const reduxCredentials = useSelector(userData);
   const [userProfile, setUserProfile] = useState({
     username: "",
     email: "",
+    favorites: [],
   });
   const [profileImage, setProfileImage] = useState("");
   const [newUsername, setNewUsername] = useState("");
@@ -22,8 +24,8 @@ export const Profile = () => {
     if (reduxCredentials?.credentials?.token && !userProfile.username) {
       getProfile(reduxCredentials.credentials.token)
         .then((response) => {
-          const { username, email, profile_image } = response.data.data;
-          setUserProfile({ username, email });
+          const { username, email, profile_image, favorites } = response.data.data;
+          setUserProfile({ username, email, favorites });
           setProfileImage(profile_image);
         })
         .catch((error) => alert("Se produjo un error al cargar tu perfil"));
@@ -55,32 +57,52 @@ export const Profile = () => {
       const timeout = setTimeout(() => {
         window.location.reload();
       }, 1000);
-  
+
       return () => clearTimeout(timeout);
     }
   }, [updateSuccess]);
 
   return (
-    <Container
-      className="d-flex align-items-center justify-content-center"
-      style={{ height: "80vh", width: "80vw" }}
-    >
+    <Container className="d-flex align-items-center justify-content-center" style={{ minHeight: "100vh" }}>
       <Card className="ProfileCard shadow-lg w-75">
-        <div className="d-flex justify-content-center">
+        <div className="d-flex justify-content-center mt-4">
           <Image
             src={profileImage || "https://cdn-icons-png.flaticon.com/512/1077/1077063.png"}
             alt="profile image"
-            className="ProfileImage mx-auto mt-4"
+            className="ProfileImage"
             roundedCircle
-            width={150}
-            height={150}
+            width={100}
+            height={100}
           />
         </div>
         <Card.Body className="text-center">
           <Card.Title className="ProfileTitle mt-3">{userProfile.username}</Card.Title>
-          <Card.Text>
-            <p className="ProfileEmail mb-4">{userProfile.email}</p>
-          </Card.Text>
+          <Card.Text className="ProfileEmail mb-4">{userProfile.email}</Card.Text>
+          {userProfile.favorites.length > 0 && (
+            <>
+              <h3 className="mb-3">Favoritos:</h3>
+              <Table striped bordered responsive>
+                <thead>
+                  <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Genre</th>
+                    <th>Year</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {userProfile.favorites.map((favorite) => (
+                    <tr key={favorite.id}>
+                      <td>{favorite.Videogame.title}</td>
+                      <td>{favorite.Videogame.description}</td>
+                      <td>{favorite.Videogame.genre}</td>
+                      <td>{favorite.Videogame.year}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </Table>
+            </>
+          )}
           {showUpdateForm ? (
             <>
               <input
