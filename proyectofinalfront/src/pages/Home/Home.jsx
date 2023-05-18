@@ -16,11 +16,8 @@ export const Home = () => {
         <Row className="m-0">
           <Col xs={12} md={6} lg={4} className="d-flex justify-content-center align-items-center vh-100">
             <div className="text-center">
-              <h1>Bienvenido a nuestra página web</h1>
-              <p>Te recomendamos los mejores juegos</p>
-              <Nav.Link href="/getallvideogames">
-                <Button variant="primary">Ver juegos</Button>
-              </Nav.Link>
+              <h1>Welcome to my website</h1>
+              <p>Search videogames by filters</p>
             </div>
           </Col>
           <Col xs={12} md={6} lg={8} className="d-flex align-items-center">
