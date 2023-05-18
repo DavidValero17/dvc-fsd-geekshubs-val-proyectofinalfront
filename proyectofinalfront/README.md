@@ -119,7 +119,7 @@ Desde la misma vista detalle tendremos la opción de agregar dicho videojuego a 
 
 ![Alt text](assets/a%C3%B1adido%20a%20favorito.png)
 
-Una vez añadido el videojuego a favoritos si volvemos a la vista profile podremos ver al final de la página los videojuegos añadidos a favoritos con la opción de eliminarlos de favoritos si deseas.
+Una vez añadido el videojuego a favoritos si volvemos a la vista profile podremos ver al final de la página los videojuegos añadidos a favoritos con la opción de eliminarlos de favoritos si así se desea.
 
 ![Alt text](assets/profile%20con%20favorito%20a%C3%B1adido.png)
 

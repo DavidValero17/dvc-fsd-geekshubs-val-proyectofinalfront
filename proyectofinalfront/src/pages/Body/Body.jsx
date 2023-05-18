@@ -12,7 +12,6 @@ import { AddVideogame } from "../AddVideogame/AddVideogame";
 import { UpdateVideogame } from "../UpdateVideogame/UpdateVideogame";
 import { VideogameDetail } from "../VideogameDetail/VideogameDetail";
 
-
 export const Body = () => {
   return (
     <>

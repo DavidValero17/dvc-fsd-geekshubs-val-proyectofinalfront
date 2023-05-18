@@ -7,10 +7,10 @@ export const videogameSlice = createSlice({
   },
   reducers: {
     setVideogames: (state, action) => {
-        return {
-            ...state,
-            ...action.payload,
-        };
+      return {
+        ...state,
+        ...action.payload,
+      };
     },
   },
 });

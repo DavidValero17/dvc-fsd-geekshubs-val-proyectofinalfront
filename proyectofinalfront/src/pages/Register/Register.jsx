@@ -44,7 +44,10 @@ export const Register = () => {
   return (
     <div className="loginDesign">
       <Container fluid className="CenteredForm">
-        <Row className="justify-content-center align-items-center" style={{ minHeight: "100vh" }}>
+        <Row
+          className="justify-content-center align-items-center"
+          style={{ minHeight: "100vh" }}
+        >
           <Col xs={12} md={6} lg={4}>
             {registroExitoso ? (
               <h2>¡Gracias por registrarte!</h2>

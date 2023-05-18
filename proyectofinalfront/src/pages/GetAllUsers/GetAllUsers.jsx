@@ -15,9 +15,7 @@ export const GetAllUsers = () => {
         .then((respuesta) => {
           setUserInfo(respuesta.data.data);
         })
-        .catch((error) =>
-          alert("Se produjo un error al cargar los clientes")
-        );
+        .catch((error) => alert("Se produjo un error al cargar los clientes"));
     }
   }, [userInfo]);
 

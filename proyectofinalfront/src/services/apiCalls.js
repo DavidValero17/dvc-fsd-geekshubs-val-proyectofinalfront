@@ -115,7 +115,7 @@ export const deleteFavorite = async (body, token) => {
     headers: {
       Authorization: "Bearer " + token,
     },
-    data: body, // Pasar los parámetros en la propiedad 'data'
+    data: body, 
   };
   return await axios.delete(`${root}/user/deletefavorite`, config);
 };

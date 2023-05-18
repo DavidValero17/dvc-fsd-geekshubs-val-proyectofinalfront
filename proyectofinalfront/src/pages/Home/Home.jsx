@@ -14,7 +14,12 @@ export const Home = () => {
     <div className="HomePage">
       <Container fluid className="p-0">
         <Row className="m-0">
-          <Col xs={12} md={6} lg={4} className="d-flex justify-content-center align-items-center vh-100">
+          <Col
+            xs={12}
+            md={6}
+            lg={4}
+            className="d-flex justify-content-center align-items-center vh-100"
+          >
             <div className="text-center">
               <h1>Welcome to my website</h1>
               <p>Search videogames by filters</p>
@@ -24,7 +29,11 @@ export const Home = () => {
             <Row>
               {images.map((imageUrl, index) => (
                 <Col key={index} xs={4} className="d-none d-md-block">
-                  <img src={imageUrl} alt={`Imagen ${index}`} className="img-fluid" />
+                  <img
+                    src={imageUrl}
+                    alt={`Imagen ${index}`}
+                    className="img-fluid"
+                  />
                 </Col>
               ))}
             </Row>

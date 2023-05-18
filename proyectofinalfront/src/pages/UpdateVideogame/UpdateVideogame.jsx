@@ -1,23 +1,23 @@
-import React, { useState } from 'react';
-import { updateVideogame } from '../../services/apiCalls';
+import React, { useState } from "react";
+import { updateVideogame } from "../../services/apiCalls";
 import { useSelector } from "react-redux";
 import { userData } from "../userSlice";
-import { Container, Form, Button } from 'react-bootstrap';
+import { Container, Form, Button } from "react-bootstrap";
 
 export const UpdateVideogame = () => {
   const userState = useSelector(userData);
   const [formData, setFormData] = useState({
-    videogame_id: '',
-    title: '',
-    image: '',
-    description: '',
-    genre: '',
-    year: '',
+    videogame_id: "",
+    title: "",
+    image: "",
+    description: "",
+    genre: "",
+    year: "",
     multiplayer: false,
     online: false,
-    developer_id: '',
+    developer_id: "",
   });
-  const [successMessage, setSuccessMessage] = useState('');
+  const [successMessage, setSuccessMessage] = useState("");
 
   const handleChange = (e) => {
     setFormData({
@@ -36,7 +36,17 @@ export const UpdateVideogame = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { videogame_id, title, image, description, genre, year, multiplayer, online, developer_id } = formData;
+      const {
+        videogame_id,
+        title,
+        image,
+        description,
+        genre,
+        year,
+        multiplayer,
+        online,
+        developer_id,
+      } = formData;
       const data = {
         videogame_id,
         title,
@@ -46,26 +56,26 @@ export const UpdateVideogame = () => {
         year,
         multiplayer,
         online,
-        developer_id
+        developer_id,
       };
       const response = await updateVideogame(data, userState.credentials.token);
-      setSuccessMessage('El videojuego ha sido actualizado exitosamente.');
+      setSuccessMessage("El videojuego ha sido actualizado exitosamente.");
       setFormData({
-        videogame_id: '',
-        title: '',
-        image: '',
-        description: '',
-        genre: '',
-        year: '',
+        videogame_id: "",
+        title: "",
+        image: "",
+        description: "",
+        genre: "",
+        year: "",
         multiplayer: false,
         online: false,
-        developer_id: '',
+        developer_id: "",
       });
       setTimeout(() => {
         window.location.reload();
       }, 1000);
     } catch (error) {
-      console.error('Error al actualizar el videojuego:', error);
+      console.error("Error al actualizar el videojuego:", error);
     }
   };
 
@@ -155,7 +165,9 @@ export const UpdateVideogame = () => {
             onChange={handleChange}
           />
         </Form.Group>
-        <Button variant="primary" type="submit">Actualizar</Button>
+        <Button variant="primary" type="submit">
+          Actualizar
+        </Button>
       </Form>
     </Container>
   );

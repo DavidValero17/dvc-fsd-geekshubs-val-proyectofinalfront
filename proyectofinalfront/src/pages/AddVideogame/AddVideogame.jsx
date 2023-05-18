@@ -1,23 +1,22 @@
-import React, { useState } from 'react';
-import { addVideogame } from '../../services/apiCalls';
+import React, { useState } from "react";
+import { addVideogame } from "../../services/apiCalls";
 import { useSelector } from "react-redux";
 import { userData } from "../userSlice";
-import { Container, Form, Button } from 'react-bootstrap';
+import { Container, Form, Button } from "react-bootstrap";
 
 export const AddVideogame = () => {
-
   const userState = useSelector(userData);
   const [formData, setFormData] = useState({
-    title: '',
-    image: '',
-    description: '',
-    genre: '',
-    year: '',
+    title: "",
+    image: "",
+    description: "",
+    genre: "",
+    year: "",
     multiplayer: false,
     online: false,
-    developer_id: '',
+    developer_id: "",
   });
-  const [successMessage, setSuccessMessage] = useState('');
+  const [successMessage, setSuccessMessage] = useState("");
 
   const handleChange = (e) => {
     setFormData({
@@ -36,23 +35,26 @@ export const AddVideogame = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const respuesta = await addVideogame(formData, userState.credentials.token);
-      setSuccessMessage('El videojuego ha sido añadido exitosamente.');
+      const respuesta = await addVideogame(
+        formData,
+        userState.credentials.token
+      );
+      setSuccessMessage("El videojuego ha sido añadido exitosamente.");
       setFormData({
-        title: '',
-        image: '',
-        description: '',
-        genre: '',
-        year: '',
+        title: "",
+        image: "",
+        description: "",
+        genre: "",
+        year: "",
         multiplayer: false,
         online: false,
-        developer_id: '',
+        developer_id: "",
       });
       setTimeout(() => {
         window.location.reload();
       }, 2000);
     } catch (error) {
-      console.error('Error al añadir el videojuego:', error);
+      console.error("Error al añadir el videojuego:", error);
     }
   };
 
@@ -133,7 +135,9 @@ export const AddVideogame = () => {
             onChange={handleChange}
           />
         </Form.Group>
-        <Button variant="primary" type="submit">Añadir</Button>
+        <Button variant="primary" type="submit">
+          Añadir
+        </Button>
       </Form>
     </Container>
   );

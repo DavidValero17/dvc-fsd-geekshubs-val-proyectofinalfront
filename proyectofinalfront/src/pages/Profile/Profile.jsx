@@ -3,7 +3,11 @@ import Card from "react-bootstrap/Card";
 import Container from "react-bootstrap/Container";
 import Image from "react-bootstrap/Image";
 import { useSelector } from "react-redux";
-import { getProfile, updateProfile, deleteFavorite } from "../../services/apiCalls";
+import {
+  getProfile,
+  updateProfile,
+  deleteFavorite,
+} from "../../services/apiCalls";
 import { userData } from "../userSlice";
 import Alert from "react-bootstrap/Alert";
 import Table from "react-bootstrap/Table";
@@ -157,7 +161,9 @@ export const Profile = () => {
                       <td>{favorite.Videogame.year}</td>
                       <td>
                         <button
-                          onClick={() => handleDeleteFavorite(favorite.videogame_id)}
+                          onClick={() =>
+                            handleDeleteFavorite(favorite.videogame_id)
+                          }
                           className="btn btn-danger"
                         >
                           Delete
